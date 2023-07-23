@@ -46,30 +46,54 @@ opt.wildmode = "longest:full,full"
 -- }}}
 
 -- Default Plugins {{{
-local disabled_built_ins = {
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "gzip",
-    "zip",
-    "zipPlugin",
-    "tar",
-    "tarPlugin",
-    "getscript",
-    "getscriptPlugin",
-    "vimball",
-    "vimballPlugin",
-    "2html_plugin",
-    "logipat",
-    "rrhelper",
-    "spellfile_plugin",
-    "matchit"
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-    g["loaded_" .. plugin] = 1
-end
+--local disabled_built_ins = {
+--    "netrw",
+--    "netrwPlugin",
+--    "netrwSettings",
+--    "netrwFileHandlers",
+--    "gzip",
+--    "zip",
+--    "zipPlugin",
+--    "tar",
+--    "tarPlugin",
+--    "getscript",
+--    "getscriptPlugin",
+--    "vimball",
+--    "vimballPlugin",
+--    "2html_plugin",
+--    "logipat",
+--    "rrhelper",
+--    "spellfile_plugin",
+--    "matchit"
+--}
+--
+--for _, plugin in pairs(disabled_built_ins) do
+--    g["loaded_" .. plugin] = 1
+--end
 -- }}}
+--" use hybride/relative line numbers {{{ <https://jeffkreeftmeijer.com/vim-number/>
+vim.api.nvim_command('set number relativenumber')
+vim.api.nvim_create_autocmd({'WinEnter','FocusGained','InsertLeave'}, {
+  command = 'set relativenumber'
+} )
+vim.api.nvim_create_autocmd({'WinLeave','FocusLost','InsertEnter'}, {
+  command = 'set norelativenumber'
+} )
+--"}}}
+
+--vim.api.nvim_create_user_command('Bd', vim.api.nvim_command('bp | bd #'), { nargs = 0 })
+vim.api.nvim_create_user_command('Bd', 'bp | bd #', { nargs = 0 })
+
+-- {{{  https://unix.stackexchange.com/questions/43119/preserve-modified-time-stamp-after-edit
+--if has('unix')
+--	function! WritePreserveDate()
+--		let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
+--		write
+--		call system("touch --date='@".mtime."' ".shellescape(expand('%:p')))
+--		edit
+--	endfunction
+--endif
+---}}}
+
 
 -- vim: tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=1

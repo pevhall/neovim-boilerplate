@@ -51,6 +51,7 @@ cmp.setup{
   }
 }
 
--- Add snippets from Friendly Snippets
-require("luasnip/loaders/from_vscode").lazy_load()
+-- Add snippets from Friendly Snippets:ew
+--require("luasnip.loaders.from_lua").load({paths = stepath('config').."/snippets"})
+--require("luasnip/loaders/from_vscode").lazy_load()
 

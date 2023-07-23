@@ -51,6 +51,17 @@ return {
   },
   -- }}}
 
+  { --{{{ luasnip
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
+    config = function()
+      require "extensions.luasnip"
+    end
+  }, -- }}}
+
   -- CMP {{{
   {
     'hrsh7th/nvim-cmp',
@@ -81,7 +92,7 @@ return {
   },
   -- }}}
 
-  -- Git Signs{{{
+  -- Git Signs {{{
   {
     'lewis6991/gitsigns.nvim',
     lazy = false,
@@ -114,6 +125,30 @@ return {
   },
   -- }}}
 
+--{{{ TreeSitter TextObjects
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    config = function()
+      require "extensions.treesitter_textojects"
+    end
+  },
+
+--}}}
+
+--{{{ TreeSitter Context
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+  },
+
+--}}}
+
+
+  -- vim-visual-multi {{{
+  {
+    'mg979/vim-visual-multi',
+  },
+  -- }}}
+
   -- Theme: Sonokai {{{
   {
     "sainnhe/sonokai",
@@ -121,6 +156,12 @@ return {
     config = function ()
       require "extensions.colorscheme.sonokai"
     end
+  },
+  -- }}}
+
+  -- Theme: Material {{{
+  {
+    "marko-cerovac/material.nvim",
   },
   -- }}}
 
