@@ -64,6 +64,7 @@ end architecture;
 ]], { f = f(ret_filename, {}), n = i(1, 'rtl'), v = i(2) } ) ),
   s('proce', fmt([[
 process({c})
+begin
   if rising_edge({c2}) then
     if {e} = '1' then
       {d}
@@ -73,6 +74,7 @@ end process;
 ]], {c = i(1,'clk_i'), c2 = extras.rep(1), e = i(2, 'en_i'), d = i(3)} ) ),
   s('proc', fmt([[
 process({c})
+begin
   if rising_edge({c2}) then
     {d}
   end if;
@@ -80,6 +82,7 @@ end process;
 ]], {c = i(1,'clk_i'), c2 = extras.rep(1), d = i(2)} ) ),
   s('proa', fmt([[
 process({a})
+begin
   {d}
 end process;
 ]], {a = i(1,'all'), d = i(2)} ) ),

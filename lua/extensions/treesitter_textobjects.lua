@@ -13,12 +13,10 @@ require'nvim-treesitter.configs'.setup {
         ["im"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
-        ["ai"] = "@conditional.outer",
-        ["ii"] = "@conditional.inner",
+        ["ad"] = "@conditional.outer",
+        ["id"] = "@conditional.inner",
         ["ao"] = "@loop.outer",
         ["io"] = "@loop.inner",
-        ["az"] = "@fold.outer",
-        ["iz"] = "@fold.inner",
         ["a-"] = "@comment.outer",
         ["i-"] = "@comment.inner",
         -- You can optionally set descriptions to the mappings (used in the desc parameter of
@@ -63,9 +61,8 @@ require'nvim-treesitter.configs'.setup {
       goto_next_start = {
         ["]c"] = "@class.outer",
         ["]m"] = "@function.outer",
-        ["]i"] = "@conditional.outer",
+        ["]d"] = "@conditional.outer",
         ["]o"] = "@loop.outer",
-        ["]z"] = "@fold.outer",
         ["]-"] = "@comment.outer",
         --
         -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
@@ -75,30 +72,26 @@ require'nvim-treesitter.configs'.setup {
         -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
         -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
         ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
---        ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
       },
       goto_next_end = {
         ["]C"] = "@class.outer",
         ["]M"] = "@function.outer",
-        ["]I"] = "@conditional.outer",
+        ["]D"] = "@conditional.outer",
         ["]O"] = "@loop.outer",
-        ["]Z"] = "@fold.outer",
         ["]_"] = "@comment.outer",
       },
       goto_previous_start = {
         ["[c"] = "@class.outer",
         ["[m"] = "@function.outer",
-        ["[i"] = "@conditional.outer",
+        ["[d"] = "@conditional.outer",
         ["[o"] = "@loop.outer",
-        ["[z"] = "@fold.outer",
         ["[-"] = "@comment.outer",
       },
       goto_previous_end = {
         ["[C"] = "@class.outer",
         ["[M"] = "@function.outer",
-        ["[I"] = "@conditional.outer",
+        ["[D"] = "@conditional.outer",
         ["[O"] = "@loop.outer",
-        ["[Z"] = "@fold.outer",
         ["]_"] = "@comment.outer",
       },
     },

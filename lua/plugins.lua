@@ -51,7 +51,8 @@ return {
   },
   -- }}}
 
-  { --{{{ luasnip
+--{{{ luasnip 
+  {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
     version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
@@ -106,7 +107,7 @@ return {
   {
     "folke/trouble.nvim",
     lazy = true,
-    dependencies = "kyazdani42/nvim-web-devicons",
+    dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require "extensions.trouble"
     end,
@@ -129,7 +130,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
     config = function()
-      require "extensions.treesitter_textojects"
+      require "extensions.treesitter_textobjects"
     end
   },
 
@@ -142,10 +143,28 @@ return {
 
 --}}}
 
-
   -- vim-visual-multi {{{
   {
     'mg979/vim-visual-multi',
+  },
+  -- }}}
+
+  --  {{{ indent-blankline.nvim
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      require "extensions.indent_blankline"
+    end,
+  },
+  -- }}}
+
+  --  {{{ lualine
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require('lualine').setup()
+    end,
   },
   -- }}}
 
@@ -162,6 +181,9 @@ return {
   -- Theme: Material {{{
   {
     "marko-cerovac/material.nvim",
+    config = function()
+      require "extensions.material"
+    end,
   },
   -- }}}
 
