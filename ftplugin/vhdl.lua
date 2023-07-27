@@ -5,4 +5,6 @@ vim.cmd('abb var variable')
 vim.cmd('abb const constant')
 vim.cmd('abb sl std_logic')
 vim.cmd('abb slv std_logic_vector')
+vim.cmd('abb pro process')
+vim.cmd('abb func function')
 

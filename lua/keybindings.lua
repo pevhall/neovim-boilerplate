@@ -56,12 +56,12 @@ nm('<leader>/', '/\\<\\><left><left>')
 --" swap word under cursor with word at mark x
 nm('gx', 'm``xyiw``viwp`xviwp``')
 -- first, delete some text. Then, use visual mode to select some other text, and press Ctrl-S. The two pieces of text should then be swapped.
-vm('g<c-x>', '<Esc>`.``gvP``P')
+vm('<leader>gx', '<Esc>`.``gvP``P')
 
 
 --move selected line up or down with J and K (todo add number)
-vm("J", ":m '>+1<CR>gv=gv")
-vm("K", ":m '<-2<CR>gv=gv")
+vm("<c-j>", ":m '>+1<CR>gv=gv")
+vm("<c-k>", ":m '<-2<CR>gv=gv")
 
 -- move cursor to centre of window after c-u or c-d
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -77,6 +77,8 @@ nm('[q', ':cprevious<CR>')
 nm(']l', ':lnext<CR>')
 nm('[l', ':lprevious<CR>')
 --}}}
+
+--NOTE: more keybindings in ./extensions/treesitter_textobjects.lua
 
 -- copy the current file path: {{{
 --copy abs file path

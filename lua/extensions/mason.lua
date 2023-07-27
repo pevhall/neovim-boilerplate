@@ -28,5 +28,10 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+local util = require 'lspconfig.util'
+
+lspconfig.svls.setup {
+  root_dir = util.root_pattern(".svls.toml", ".git")
+}
 lspconfig.ghdl_ls.setup {}
 lspconfig.pyright.setup {}

@@ -38,6 +38,8 @@ return {
   s('vars', fmt('varaible {n} : signed({w}-1 downto 0){e}{v};', { n = i(1), w = i(2), v = i(3), e = extras.nonempty(3, ' := ', ''), } ) ),
   s('varu', fmt('varaible {n} : unsigned({w}-1 downto 0){e}{v};', { n = i(1), w = i(2), v = i(3), e = extras.nonempty(3, ' := ', ''), } ) ),
   s('o', fmt('(others => {v})', {v = i(1,[['0']]) } ) ),
+  s('damdb', t([[attribute MARK_DEBUG : string;]]) ),
+  s('amdb', fmt([[attribute MARK_DEBUG of {s} : signal is “TRUE”;]], {s = i(1)  }) ),
   s('libs', fmt([[
 library ieee;
 use ieee.std_logic_1164.all;
