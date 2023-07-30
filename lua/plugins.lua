@@ -158,16 +158,6 @@ return {
   },
   -- }}}
 
-  --  {{{ lualine
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require('lualine').setup()
-    end,
-  },
-  -- }}}
-
   -- Theme: Sonokai {{{
   {
     "sainnhe/sonokai",
@@ -183,6 +173,35 @@ return {
     "marko-cerovac/material.nvim",
     config = function()
       require "extensions.material"
+    end,
+  },
+  -- }}}
+
+  -- Theme: Tokyonight {{{
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function()
+      require('tokyonight').setup ({
+--       lualine_bold = true,
+--       sidebars = { "qf", "vista_kind", "terminal", "packer" },
+      })
+    end,
+  },
+  -- }}}
+
+  --  {{{ lualine
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'tokyonight'
+        }
+      }
     end,
   },
   -- }}}

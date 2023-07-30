@@ -71,6 +71,7 @@ opt.wildmode = "longest:full,full"
 --    g["loaded_" .. plugin] = 1
 --end
 -- }}}
+
 --" use hybride/relative line numbers {{{ <https://jeffkreeftmeijer.com/vim-number/>
 vim.api.nvim_command('set number relativenumber')
 vim.api.nvim_create_autocmd({'WinEnter','FocusGained','InsertLeave'}, {
