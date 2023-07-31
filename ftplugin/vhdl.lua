@@ -7,11 +7,34 @@ vim.cmd('abb sl std_logic')
 vim.cmd('abb slv std_logic_vector')
 vim.cmd('abb pro process')
 vim.cmd('abb func function')
+vim.cmd('abb ret return')
+vim.cmd('abb gen generate')
 
 local function getSpaceString(len)
   local result = ''
   for _ = 1, len, 1 do
     result = result .. ' '
+  end
+  return result
+end
+
+local function getCircleBrackets(str)
+  local result = 0
+  local comment = 0
+  for i = 1, #str do
+    local s = string.sub(str, i, i)
+    if s == '(' then
+      result = result + 1;
+    elseif s == ')' then
+      result = result - 1;
+    elseif s == '-' then
+      if comment == 1 then
+        break --found comment
+      end
+      comment = comment + 1
+    else
+      comment = 0
+    end
   end
   return result
 end
@@ -33,42 +56,48 @@ local function vhdlModuleInstanceFromFile(opts)
   local entityName
   local gens = {}
   local ports = {}
+  local bracketCount = 0
 
   for line in file:lines() do
     local lineLower = string.lower(line)
+    print(bracketCount .. " : " .. lineLower)
     if not inEnt then
-      entityName = string.match(lineLower, '[^-]*entity%s+([%w_]+)%s+is.*')
+      entityName = string.match(lineLower, '^[^-]*entity%s+([%w_]+)%s+is.*')
       if entityName ~= nil then
         inEnt = true
       end
     elseif inGens then
-      local name = string.match(line, '%s*([%w_]+)%s*:.*')
+      local name = string.match(line, '^%s*([%w_]+)%s*:.*')
       if name ~= nil then
         table.insert(gens, name)
       end
-      local mEnd = string.match(line, '[^-]*%).*')
-      if mEnd ~= nil then
+      bracketCount = bracketCount + getCircleBrackets(line)
+--      local mEnd = string.match(line, '^[^-]*%).*')
+--      if mEnd ~= nil then
+      if bracketCount == -1 then
         inGens = false
       end
     elseif inPorts then
-      local name = string.match(line, '%s*([%w_]+)%s*:.*')
+      local name = string.match(line, '^%s*([%w_]+)%s*:.*')
       if name ~= nil then
         table.insert(ports, name)
       end
-      local mEnd = string.match(line, '[^-]*%).*')
-      if mEnd ~= nil then
+      bracketCount = bracketCount + getCircleBrackets(line)
+      if bracketCount == -1 then
         inPorts = false
       end
     else
-      local mGen = string.match(lineLower, '[^-]*generic%s+%(')
+      local mGen = string.match(lineLower, '^[^-]*generic%s+%(')
+      bracketCount = 0
       if mGen ~= nil then
         inGens = true
       else
-        local mPort = string.match(lineLower, '[^-]*port')
+        local mPort = string.match(lineLower, '^[^-]*port%s*%(')
+        bracketCount = 0
         if mPort ~= nil then
           inPorts = true
         else
-          local mEntEnd = string.match(lineLower, '[^-]*end%s+entity')
+          local mEntEnd = string.match(lineLower, '^[^-]*end%s+entity')
           if mEntEnd ~= nil then
             inEnt = false
             doneEnt = true
@@ -81,8 +110,9 @@ local function vhdlModuleInstanceFromFile(opts)
   io.close(file)
 
   if not doneEnt then
+    print("Warning: could not find entity")
     return
-  end 
+  end
 
   local maxLength = 0
   for _, v in pairs(gens) do
