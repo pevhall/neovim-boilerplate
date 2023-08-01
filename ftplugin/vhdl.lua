@@ -18,7 +18,7 @@ local function getSpaceString(len)
   return result
 end
 
-local function getCircleBrackets(str)
+local function getCircleBracketDepth(str)
   local result = 0
   local comment = 0
   for i = 1, #str do
@@ -41,11 +41,20 @@ end
 
 local function vhdlModuleInstanceFromFile(opts)
 
-  local file=io.open(opts['args'],"r")
+  local named = nil
+  if #opts.fargs > 2 then
+    print("ERROR more then two arguemnts passed")
+    return
+  end;
+  local file=io.open(opts.fargs[1],"r")
+
+  if #opts.fargs == 2 then
+    named = string.lower(opts.fargs[2])
+  end
 
   if file == nil then
     print("ERROR: could not open file")
-    return {}
+    return
   end
 
   local inEnt = false
@@ -60,18 +69,28 @@ local function vhdlModuleInstanceFromFile(opts)
 
   for line in file:lines() do
     local lineLower = string.lower(line)
-    print(bracketCount .. " : " .. lineLower)
     if not inEnt then
-      entityName = string.match(lineLower, '^[^-]*entity%s+([%w_]+)%s+is.*')
-      if entityName ~= nil then
-        inEnt = true
+      if named == nil then
+        entityName = string.match(lineLower, '^[^-]*entity%s+([%w_]+)%s+is.*')
+        if entityName ~= nil then
+          inEnt = true
+        end
+      else
+        local m = string.match(lineLower, '^[^-]*component%s+'.. named ..'%s+is.*')
+        if m == nil then
+          m = string.match(lineLower, '^[^-]*entity%s+'.. named ..'%s+is.*')
+        end
+        if m ~= nil then
+          entityName = named
+          inEnt = true
+        end
       end
     elseif inGens then
       local name = string.match(line, '^%s*([%w_]+)%s*:.*')
       if name ~= nil then
         table.insert(gens, name)
       end
-      bracketCount = bracketCount + getCircleBrackets(line)
+      bracketCount = bracketCount + getCircleBracketDepth(line)
 --      local mEnd = string.match(line, '^[^-]*%).*')
 --      if mEnd ~= nil then
       if bracketCount == -1 then
@@ -82,7 +101,7 @@ local function vhdlModuleInstanceFromFile(opts)
       if name ~= nil then
         table.insert(ports, name)
       end
-      bracketCount = bracketCount + getCircleBrackets(line)
+      bracketCount = bracketCount + getCircleBracketDepth(line)
       if bracketCount == -1 then
         inPorts = false
       end
@@ -97,7 +116,13 @@ local function vhdlModuleInstanceFromFile(opts)
         if mPort ~= nil then
           inPorts = true
         else
-          local mEntEnd = string.match(lineLower, '^[^-]*end%s+entity')
+          local mEntEnd = string.match(lineLower, '^[^-]*end%s+'..entityName)
+          if mEntEnd == nil then
+            mEntEnd = string.match(lineLower, '^[^-]*end%s+entity')
+          end
+          if mEntEnd == nil then
+            mEntEnd = string.match(lineLower, '^[^-]*end%s+component')
+          end
           if mEntEnd ~= nil then
             inEnt = false
             doneEnt = true
@@ -160,7 +185,7 @@ local function vhdlModuleInstanceFromFile(opts)
   vim.api.nvim_buf_set_lines(0, row, row, false, wLines)
 end
 
-vim.api.nvim_create_user_command('VhdlInstance', vhdlModuleInstanceFromFile, { nargs=1 })
+vim.api.nvim_create_user_command('VhdlInstance', vhdlModuleInstanceFromFile, { nargs='+' })
 
 --function! WritePreserveDate()
 --	let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
