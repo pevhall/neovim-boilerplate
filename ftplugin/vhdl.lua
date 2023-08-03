@@ -9,6 +9,7 @@ vim.cmd('abb pro process')
 vim.cmd('abb func function')
 vim.cmd('abb ret return')
 vim.cmd('abb gen generate')
+vim.cmd('abb re rising_edge')
 
 local function getSpaceString(len)
   local result = ''

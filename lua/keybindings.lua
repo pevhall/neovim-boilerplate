@@ -94,8 +94,8 @@ nm('<leader>%:', ':let @+ = expand("%:p") . ":" . line(".")<CR>')
 -- regular copy past {{{
 vm('<c-x>', '"+x')
 vm('<c-c>', '"+y')
-nm('<c-v>', '"+p')
 vm('<c-v>', '"+p')
+nm('<c-v>', '"+p')
 --im('<c-v>', '"+p')
 im('<c-v>', '<c-r>+')
 
@@ -106,6 +106,8 @@ nm('<c-e>', '<c-v>')
 --To simulate |i_CTRL-R| in terminal-mode:
 tm('<expr> <C-R>', '<C-\\><C-N>"\'.nr2char(getchar()).\'pi\'')
 --}}}
+
+im('<a-y>', '<c-y>')
 
 -- to navigate windows and tabs from any mode: {{{
 tm('<A-p>', '<C-\\><C-N>gT')
