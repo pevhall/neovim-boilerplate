@@ -37,6 +37,10 @@ return {
   -- }}}
 
   -- Telescope {{{
+  {  -- use FZF within telescop
+    'nvim-telescope/telescope-fzf-native.nvim', 
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.1',
@@ -64,6 +68,7 @@ return {
   }, -- }}}
 
   -- CMP {{{
+  { 'tzachar/fuzzy.nvim', requires = {'nvim-telescope/telescope-fzf-native.nvim'} }, --fuzzy functions below required this
   {
     'hrsh7th/nvim-cmp',
     event = "InsertEnter",
@@ -71,6 +76,8 @@ return {
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
+      'tzachar/cmp-fuzzy-buffer',
+--      'tzachar/cmp-fuzzy-path', --requires fd
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-emoji',
       'hrsh7th/cmp-nvim-lsp-signature-help',

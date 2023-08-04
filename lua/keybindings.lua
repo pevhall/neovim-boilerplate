@@ -108,6 +108,7 @@ tm('<expr> <C-R>', '<C-\\><C-N>"\'.nr2char(getchar()).\'pi\'')
 --}}}
 
 im('<a-y>', '<c-y>')
+im('<a-e>', '<c-e>')
 
 -- to navigate windows and tabs from any mode: {{{
 tm('<A-p>', '<C-\\><C-N>gT')

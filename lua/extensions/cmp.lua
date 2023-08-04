@@ -38,7 +38,7 @@ cmp.setup{
     { name = 'nvim_lsp_signature_help' }, -- LSP for parameters in functions
     { name = 'nvim_lua' },                -- Lua Neovim API
     { name = 'luasnip' },                 -- Luasnip
-    { name = 'buffer' },                  -- Buffers
+    { name = 'fuzzy_buffer' },                  -- Buffers
     { name = 'path' },                    -- Paths
     { name = "emoji" },                   -- Emoji
   }, {
