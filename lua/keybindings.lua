@@ -79,6 +79,10 @@ nm('[l', ':lprevious<CR>')
 --}}}
 
 --NOTE: more keybindings in ./extensions/treesitter_textobjects.lua
+--NOTE: more keybindings in ./extensions/gitsigns.lua: <leader>h*
+--NOTE: more keybindings in ./extensions/cmp.lua <c-y> <c-n> <c-n> <c-p>
+im('<a-y>', '<c-y>')
+im('<a-e>', '<c-e>')
 
 -- copy the current file path: {{{
 --copy abs file path
@@ -106,9 +110,6 @@ nm('<c-e>', '<c-v>')
 --To simulate |i_CTRL-R| in terminal-mode:
 tm('<expr> <C-R>', '<C-\\><C-N>"\'.nr2char(getchar()).\'pi\'')
 --}}}
-
-im('<a-y>', '<c-y>')
-im('<a-e>', '<c-e>')
 
 -- to navigate windows and tabs from any mode: {{{
 tm('<A-p>', '<C-\\><C-N>gT')
@@ -174,3 +175,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --- {{{
 
 -- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0
+

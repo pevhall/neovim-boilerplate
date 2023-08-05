@@ -78,6 +78,7 @@ local function vhdlModuleInstanceFromFile(opts)
         end
       else
         local m = string.match(lineLower, '^[^-]*component%s+'.. named ..'%s+is.*')
+        print(str(m==nil)..lineLower)
         if m == nil then
           m = string.match(lineLower, '^[^-]*entity%s+'.. named ..'%s+is.*')
         end
