@@ -179,7 +179,7 @@ return {
   {
     "marko-cerovac/material.nvim",
     config = function()
-      require "extensions.material"
+      require "extensions.colorscheme.material"
     end,
   },
   -- }}}
