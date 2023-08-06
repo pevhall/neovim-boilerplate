@@ -11,8 +11,6 @@ local ret_filename = function (a)
 end
 
 return {
-  s('imgi', fmt('integer\'image({v})', { v = i(1) } ) ),
-  s('imgr', fmt('real\'image({v})', { v = i(1) } ) ),
   s('conr', fmt('constant {n} : real := {v};', { n = i(1), v = i(2),  } ) ),
   s('coni', fmt('constant {n} : integer := {v};', { n = i(1), v = i(2),  } ) ),
   s('conn', fmt('constant {n} : natural := {v};', { n = i(1), v = i(2),  } ) ),
@@ -37,9 +35,15 @@ return {
   s('varv', fmt('varaible {n} : std_logic_vector({w}-1 downto 0){e}{v};', { n = i(1), w = i(2), v = i(3), e = extras.nonempty(3, ' := ', ''), } ) ),
   s('vars', fmt('varaible {n} : signed({w}-1 downto 0){e}{v};', { n = i(1), w = i(2), v = i(3), e = extras.nonempty(3, ' := ', ''), } ) ),
   s('varu', fmt('varaible {n} : unsigned({w}-1 downto 0){e}{v};', { n = i(1), w = i(2), v = i(3), e = extras.nonempty(3, ' := ', ''), } ) ),
+  s('vari', fmt('varaible {n} : integer{e}{v};', { n = i(1), v = i(2), e = extras.nonempty(2, ' := ', ''), } ) ),
   s('o', fmt('(others => {v})', {v = i(1,[['0']]) } ) ),
   s('damdb', t([[attribute MARK_DEBUG : string;]]) ),
   s('amdb', fmt([[attribute MARK_DEBUG of {s} : signal is "TRUE";]], {s = i(1)  }) ),
+  s('imgi', fmt('integer\'image({v})', { v = i(1) } ) ),
+  s('imgr', fmt('real\'image({v})', { v = i(1) } ) ),
+  s('streqi', fmt('"{v} = "&integer\'image({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('hstreq', fmt('"{v} = "&to_hstring({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('ass' , fmt('assert {v} report {r} severity {s};', {v = i(1), r = i(2), s = i(3, 'FAILURE')} ) ),
   s('libs', fmt([[
 library ieee;
 use ieee.std_logic_1164.all;
@@ -93,29 +97,29 @@ signal {n}_w_ovr : unsigned({w} downto 0) := {v};
 alias {n2}_ovr is {n2}_w_ovr({w2});
 alias {n2} is {n2}_w_ovr({w2}-1 downto 0);
 ]], {n = i(1,'cntr'), n2 = extras.rep(1), w=i(2), w2 = extras.rep(2), v = i(3, [[(others => '0')]]) } ) ),
-  s('iff', f(function(args, snip)
-    local env = snip.env
-    local res = {}
-    table.insert(res, 'if  then')
-    --table.insert(res, 'if ' .. snip.captures[1] .. then')
-    for _, ele in ipairs(env.LS_SELECT_RAW) do table.insert(res, '  ' .. ele) end
-    table.insert(res, 'end if;')
-    return res
-  end, { } )),
-  s('if', { t('if '), i(1), t(' then\n'),
---    f(function(args, snip)
---      local env = snip.env
---      local res = {}
---      for _, ele in ipairs(env.LS_SELECT_RAW) do table.insert(res, '  ' .. ele) end
---      return res
---    end, { } ),
-    t('end if;')
-  } ),
-  s("selected_text", f(function(args, snip)
-    local res, env = {}, snip.env
-    table.insert(res, "Selected Text (current line is " .. env.TM_LINE_NUMBER .. "):")
-    for _, ele in ipairs(env.LS_SELECT_RAW) do table.insert(res, ele) end
-    return res
-  end, {}))
+--  s('iff', f(function(args, snip)
+--    local env = snip.env
+--    local res = {}
+--    table.insert(res, 'if  then')
+--    --table.insert(res, 'if ' .. snip.captures[1] .. then')
+--    for _, ele in ipairs(env.LS_SELECT_RAW) do table.insert(res, '  ' .. ele) end
+--    table.insert(res, 'end if;')
+--    return res
+--  end, { } )),
+--  s('if', { t('if '), i(1), t(' then\n'),
+----    f(function(args, snip)
+----      local env = snip.env
+----      local res = {}
+----      for _, ele in ipairs(env.LS_SELECT_RAW) do table.insert(res, '  ' .. ele) end
+----      return res
+----    end, { } ),
+--    t('end if;')
+--  } ),
+--  s("selected_text", f(function(args, snip)
+--    local res, env = {}, snip.env
+--    table.insert(res, "Selected Text (current line is " .. env.TM_LINE_NUMBER .. "):")
+--    for _, ele in ipairs(env.LS_SELECT_RAW) do table.insert(res, ele) end
+--    return res
+--  end, {}))
 }
 
