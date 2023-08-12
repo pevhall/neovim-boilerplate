@@ -187,7 +187,7 @@ local function vhdlModuleInstanceFromFile(opts)
   vim.api.nvim_buf_set_lines(0, row, row, false, wLines)
 end
 
-vim.api.nvim_create_user_command('VhdlInstance', vhdlModuleInstanceFromFile, { nargs='+' })
+vim.api.nvim_create_user_command('VhdlInstance', vhdlModuleInstanceFromFile, { nargs='+' , complete='file'})
 
 --function! WritePreserveDate()
 --	let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
