@@ -98,8 +98,8 @@ nm('<leader>%:', ':let @+ = expand("%:p") . ":" . line(".")<CR>')
 -- regular copy past {{{
 vm('<c-x>', '"+x')
 vm('<c-c>', '"+y')
-vm('<c-v>', '"+p')
-nm('<c-v>', '"+p')
+vm('<c-v>', '"_d"+p')
+nm('<c-v>', '"_d"+p')
 --im('<c-v>', '"+p')
 im('<c-v>', '<c-r>+')
 
