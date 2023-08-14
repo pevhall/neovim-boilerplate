@@ -1,0 +1,29 @@
+extends c
+
+snippet cout
+	std::cout << ${1} << std::endl;
+# std::cin
+snippet coutdb
+	std::cout << __FILE__ << ":" << __LINE__ << ":" << ${1} << std::endl;
+snippet coutdb
+	std::cout << __FILE__ << ":" << __LINE__ << ":" << ${1} << std::endl;
+snippet cin
+	std::cin >> ${1};
+#output string value equal
+snippet osveq
+	"${1} = " << $1
+
+## Casts
+# static
+snippet cas
+	static_cast<${1}>(${2})
+# dynamic
+snippet cad
+	dynamic_cast<${1}>(${2})
+# reinterpret
+snippet car
+	reinterpret_cast<${1}>(${2})
+# const
+
+	const_cast<${1}>(${2})
+	

@@ -77,7 +77,7 @@ begin
     end if;
   end if;
 end process;
-]], {c = i(1,'clk_i'), c2 = extras.rep(1), e = i(2, 'en_i'), d = i(3)} ) ),
+]], {c = i(1,'clk_i'), c2 = extras.rep(1), e = i(2, 'ce_i'), d = i(3)} ) ),
   s('proc', fmt([[
 process({c})
 begin
