@@ -67,7 +67,7 @@ vm("<c-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
--- paste without changing unamed reigster
+-- past without changing unamed reigster
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- quicklist navigation
@@ -98,8 +98,8 @@ nm('<leader>%:', ':let @+ = expand("%:p") . ":" . line(".")<CR>')
 -- regular copy past {{{
 vm('<c-x>', '"+x')
 vm('<c-c>', '"+y')
-vm('<c-v>', '"_d"+p')
-nm('<c-v>', '"_d"+p')
+vm('<c-v>', '"_d"+P')
+nm('<c-v>', '"_d"+P')
 --im('<c-v>', '"+p')
 im('<c-v>', '<c-r>+')
 
