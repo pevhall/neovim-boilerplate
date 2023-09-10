@@ -164,7 +164,7 @@ local function vhdlModuleInstanceFromFile(opts)
       local space = getSpaceString(maxLength - string.len(v))
       local s = '    '..v..space..' => '..v
       if i ~= #gens then
-        s = s .. ' ,'
+        s = s .. ','
       end
       table.insert(wLines, s)
 
@@ -177,7 +177,7 @@ local function vhdlModuleInstanceFromFile(opts)
       local space = getSpaceString(maxLength - string.len(v))
       local s = '    '..v..space..' => '..v
       if i ~= #ports then
-        s = s .. ' ,'
+        s = s .. ','
       end
       table.insert(wLines, s)
     end
