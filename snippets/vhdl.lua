@@ -15,7 +15,6 @@ local ret_filename = function ()
   dir, name, ext = SplitFilename(path)
   vhdlName = name:match("(.+)%..+$")
   return vhdlName
-  
 end
 
 return {
@@ -49,8 +48,10 @@ return {
   s('amdb', fmt([[attribute MARK_DEBUG of {s} : signal is "TRUE";]], {s = i(1)  }) ),
   s('imgi', fmt('integer\'image({v})', { v = i(1) } ) ),
   s('imgr', fmt('real\'image({v})', { v = i(1) } ) ),
-  s('streqi', fmt('"{v} = "&integer\'image({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
-  s('hstreq', fmt('"{v} = "&to_hstring({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('eqimgi', fmt('"{v} = "&integer\'image({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('eqhstr', fmt('"{v} = "&to_hstring({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('rpimgi', fmt('"report "&{v}&" = "&integer\'image({v2});', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('rphstr', fmt('"report "&{v}&" = "&to_hstring({v2});', { v = i(1), v2 = extras.rep(1) } ) ),
   s('ass' , fmt('assert {v} report {r} severity {s};', {v = i(1), r = i(2), s = i(3, 'FAILURE')} ) ),
   s('libs', fmt([[
 library ieee;

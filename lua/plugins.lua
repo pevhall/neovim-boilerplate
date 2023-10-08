@@ -78,7 +78,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'tzachar/cmp-fuzzy-buffer',
 --      'tzachar/cmp-fuzzy-path', --requires fd
---      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-path',
 --      'hrsh7th/cmp-emoji',
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-nvim-lua',

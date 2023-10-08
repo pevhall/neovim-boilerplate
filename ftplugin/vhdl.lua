@@ -1,3 +1,7 @@
+opt.shiftwidth = 2                  -- Set amount of space characters, when we press "<" or ">"
+opt.tabstop    = 2                  -- 1 tab equal 2 spaces
+
+
 vim.cmd('abb <buffer> o others')
 vim.cmd('abb <buffer> dt downto')
 vim.cmd('abb <buffer> sig signal')
