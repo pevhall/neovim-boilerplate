@@ -1,16 +1,9 @@
 --https://fhug.org.uk/kb/code-snippet/split-a-filename-into-path-file-and-extension/
-local lfs = require( "lfs" )
 function SplitFilename(strFilename)
-  -- Returns the Path, Filename, and Extension as 3 values
-  if lfs.attributes(strFilename,"mode") == "directory" then
-    local strPath = strFilename:gsub("[\\/]$","")
-    return strPath.."\\","",""
-  end
-  --strFilename = strFilename.."."
   return strFilename:match("^(.-)([^\\/]-%.([^\\/%.]-))%.?$")
 end
 
-local ret_filename = function ()
+local ret_vhdlName = function ()
   local path = vim.fn.expand('%')
   dir, name, ext = SplitFilename(path)
   vhdlName = name:match("(.+)%..+$")
@@ -67,7 +60,7 @@ entity {f} is
     {p}
   );
 end entity;
-]], { f = f(ret_filename, {}), g = i(1), p = i(2) } ) ),
+]], { f = f(ret_vhdlName, {}), g = i(1), p = i(2) } ) ),
   s('arch', fmt([[
 architecture {n} of {f} is
 
@@ -76,7 +69,7 @@ architecture {n} of {f} is
 begin
 
 end architecture;
-]], { f = f(ret_filename, {}), n = i(1, 'rtl'), v = i(2) } ) ),
+]], { f = f(ret_vhdlName, {}), n = i(1, 'rtl'), v = i(2) } ) ),
   s('proce', fmt([[
 process({c})
 begin

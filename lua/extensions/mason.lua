@@ -11,7 +11,8 @@ local lspconfig = require("lspconfig")
 mason.setup()
 mason_lspconfig.setup({
   ensure_installed = {
-    "lua_ls",             -- LSP for Lua language
+    "lua_ls",               -- LSP for Lua language
+--    "neocmake"            -- LSP for cmake
 --    "tsserver",           -- LSP for Typescript and Javascript
 --    "emmet_ls",           -- LSP for Emmet (Vue, HTML, CSS)
 --    "cssls",              -- LSP for CSS
@@ -35,3 +36,4 @@ lspconfig.svls.setup {
 }
 lspconfig.ghdl_ls.setup {}
 lspconfig.pyright.setup {}
+lspconfig.clangd.setup{}

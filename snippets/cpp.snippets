@@ -5,8 +5,8 @@ snippet cout
 # std::cin
 snippet coutdb
 	std::cout << __FILE__ << ":" << __LINE__ << ":" << ${1} << std::endl;
-snippet coutdb
-	std::cout << __FILE__ << ":" << __LINE__ << ":" << ${1} << std::endl;
+snippet coutdbv
+	std::cout << __FILE__ << ":" << __LINE__ << ": ${1} = " << $1 << std::endl;
 snippet cin
 	std::cin >> ${1};
 #output string value equal

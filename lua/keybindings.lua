@@ -67,9 +67,6 @@ vm("<c-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
--- past without changing unamed reigster
-vim.keymap.set("x", "<leader>p", [["_dP]])
-
 -- quicklist navigation
 nm(']q', ':cnext<CR>')
 nm('[q', ':cprevious<CR>')
@@ -100,10 +97,10 @@ vm('<c-x>', '"+x')
 vm('<c-c>', '"+y')
 vm('<c-v>', '"+P')
 nm('<c-v>', '"+P')
---im('<c-v>', '"+p')
-im('<c-v>', '<c-r>+')
+im('<c-v>', '<ESC>"+pa')
+--im('<c-v>', '<c-r>+')
 
--- cmap('<c-v>', '<c-r>+')
+-- cmap('<c-v>'<c-v>, '<c-r>+')
 -- use <C-E> for block select instead
 nm('<c-e>', '<c-v>')
 
