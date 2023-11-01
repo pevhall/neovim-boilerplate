@@ -22,7 +22,6 @@ return {
   },
   -- }}}
 
-
   -- oil {{{
   {
     'stevearc/oil.nvim',
@@ -109,6 +108,27 @@ return {
     end
   },
   -- }}}
+
+  { -- {{{ neogit
+    "NeogitOrg/neogit",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    config = true
+  }, -- }}}
+
+  {-- {{{ diffview
+    "sindrets/diffview.nvim",
+--    lazy = true,
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require "extensions.diffview"
+    end,
+  }, --}}}
 
   -- Trouble {{{
   {
