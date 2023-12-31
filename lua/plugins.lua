@@ -43,7 +43,7 @@ return {
   },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag = '0.1.5',
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -98,6 +98,10 @@ return {
     end
   },
   -- }}}
+
+-- {{{ neodev
+  { "folke/neodev.nvim", opts = {} },
+-- }}}
 
   -- Git Signs {{{
   {
@@ -179,6 +183,9 @@ return {
   --  {{{ indent-blankline.nvim
   {
     'lukas-reineke/indent-blankline.nvim',
+    dependencies = {
+      'HiPhish/rainbow-delimiters.nvim'
+    },
     config = function()
       require "extensions.indent_blankline"
     end,
@@ -195,14 +202,14 @@ return {
   },
   -- }}}
 
-  -- Theme: Material {{{
-  {
-    "marko-cerovac/material.nvim",
-    config = function()
-      require "extensions.colorscheme.material"
-    end,
-  },
-  -- }}}
+-- removed -- Theme: Material {{{ 
+--  {
+--    "marko-cerovac/material.nvim",
+--    config = function()
+--      require "extensions.colorscheme.material"
+--    end,
+--  },
+--  -- }}}
 
   -- Theme: Tokyonight {{{
   {
@@ -232,6 +239,16 @@ return {
     end,
   },
   -- }}}
+
+  {
+    'pevhall/simple_highlighting',
+    config = function()
+      vim.api.nvim_exec2([[
+        nmap <Leader>m <Plug>HighlightWordUnderCursor
+        vmap <Leader>m <Plug>HighlightWordUnderCursor
+        ]], {})
+    end,
+  },
 
 }
 

@@ -187,7 +187,8 @@ local function vhdlModuleInstanceFromFile(opts)
     end
     table.insert(wLines, '  );')
   end
-  local row, _ = table.unpack(vim.api.nvim_win_get_cursor(0))
+  --local row, _ = table.unpack(vim.api.nvim_win_get_cursor(0))
+  local row, _ = vim.api.nvim__buf_stats(0).current_lnum; 
   vim.api.nvim_buf_set_lines(0, row, row, false, wLines)
 end
 

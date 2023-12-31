@@ -85,6 +85,14 @@ vim.api.nvim_create_autocmd({'WinLeave','FocusLost','InsertEnter'}, {
 --vim.api.nvim_create_user_command('Bd', vim.api.nvim_command('bp | bd #'), { nargs = 0 })
 vim.api.nvim_create_user_command('Bd', 'bp | bd #', { nargs = 0 })
 
+-- highlight yanked text for 200ms using the "Visual" highlight group
+vim.cmd[[
+augroup highlight_yank
+autocmd!
+au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=250})
+augroup END
+]]
+
 -- {{{  https://unix.stackexchange.com/questions/43119/preserve-modified-time-stamp-after-edit
 --if has('unix')
 --	function! WritePreserveDate()
