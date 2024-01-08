@@ -43,8 +43,8 @@ return {
   s('imgr', fmt('real\'image({v})', { v = i(1) } ) ),
   s('eqimgi', fmt('"{v} = "&integer\'image({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
   s('eqhstr', fmt('"{v} = "&to_hstring({v2})', { v = i(1), v2 = extras.rep(1) } ) ),
-  s('rpimgi', fmt('"report "&{v}&" = "&integer\'image({v2});', { v = i(1), v2 = extras.rep(1) } ) ),
-  s('rphstr', fmt('"report "&{v}&" = "&to_hstring({v2});', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('rpimgi', fmt('report "{v} = "&integer\'image({v2});', { v = i(1), v2 = extras.rep(1) } ) ),
+  s('rphstr', fmt('report "{v} = "&to_hstring({v2});', { v = i(1), v2 = extras.rep(1) } ) ),
   s('ass' , fmt('assert {v} report {r} severity {s};', {v = i(1), r = i(2), s = i(3, 'FAILURE')} ) ),
   s('libs', fmt([[
 library ieee;

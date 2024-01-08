@@ -240,7 +240,7 @@ return {
   },
   -- }}}
 
-  {
+  { -- {{{ simple_highlighting
     'pevhall/simple_highlighting',
     config = function()
       vim.api.nvim_exec2([[
@@ -248,7 +248,7 @@ return {
         vmap <Leader>m <Plug>HighlightWordUnderCursor
         ]], {})
     end,
-  },
+  }, -- }}}
 
 }
 

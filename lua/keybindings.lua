@@ -1,7 +1,6 @@
 require "helpers/globals"
 require "helpers/keyboard"
 
-
 -- Telescope {{{
 nm('<leader>tdd', '<cmd>Telescope lsp_definitions<CR>')                            -- Goto declaration
 nm('<leader>tdt', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')              -- Search for dynamic symbols
@@ -13,8 +12,11 @@ nm('<leader>tgb', '<cmd>Telescope git_branches<CR>')                            
 nm('<leader>tgg', '<cmd>Telescope live_grep<CR>')                                  -- Find a string in project
 nm('<leader>tb', '<cmd>Telescope buffers<CR>')                                    -- Show all buffers
 nm('<leader>tm', '<cmd>Telescope marks<CR>')                                            -- Show all marks
+nm('<leader>tr', '<cmd>Telescope registers<CR>')
 nm('<leader>ta', '<cmd>Telescope<CR>')                                            -- Show all commands
 nm('<leader>tt', '<cmd>Telescope resume<CR>')                                            -- Show all commands
+nm('<leader>t[', '<cmd>Telescope tags<CR>')
+nm('<leader>th', '<cmd>Telescope help_tags<CR>')
 -- }}}
 
 -- Trouble {{{
@@ -57,7 +59,8 @@ nm('<leader>/', '/\\<\\><left><left>')
 nm('gx', 'm``xyiw``viwp`xviwp``')
 -- first, delete some text. Then, use visual mode to select some other text, and press Ctrl-S. The two pieces of text should then be swapped.
 vm('<leader>gx', '<Esc>`.``gvP``P')
-
+nm('<leader>m', 'mX')
+nm('gm', '`X')
 
 --move selected line up or down with J and K (todo add number)
 vm("<c-j>", ":m '>+1<CR>gv=gv")
