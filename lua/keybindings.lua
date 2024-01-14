@@ -59,8 +59,6 @@ nm('<leader>/', '/\\<\\><left><left>')
 nm('gx', 'm``xyiw``viwp`xviwp``')
 -- first, delete some text. Then, use visual mode to select some other text, and press Ctrl-S. The two pieces of text should then be swapped.
 vm('<leader>gx', '<Esc>`.``gvP``P')
-nm('<leader>m', 'mX')
-nm('gm', '`X')
 
 --move selected line up or down with J and K (todo add number)
 vm("<c-j>", ":m '>+1<CR>gv=gv")
