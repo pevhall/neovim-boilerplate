@@ -112,22 +112,22 @@ local function vhdlModuleInstanceFromFile(opts)
         inPorts = false
       end
     else
-      local mGen = string.match(lineLower, '^[^-]*generic%s+%(')
+      local mGen = string.match(lineLower, '^[^-]*generic%W+%(')
       bracketCount = 0
       if mGen ~= nil then
         inGens = true
       else
-        local mPort = string.match(lineLower, '^[^-]*port%s*%(')
+        local mPort = string.match(lineLower, '^[^-]*port%W*%(')
         bracketCount = 0
         if mPort ~= nil then
           inPorts = true
         else
           local mEntEnd = string.match(lineLower, '^[^-]*end%s+'..entityName)
           if mEntEnd == nil then
-            mEntEnd = string.match(lineLower, '^[^-]*end%s+entity')
+            mEntEnd = string.match(lineLower, '^[^-]*end%W+entity')
           end
           if mEntEnd == nil then
-            mEntEnd = string.match(lineLower, '^[^-]*end%s+component')
+            mEntEnd = string.match(lineLower, '^[^-]*end%W+component')
           end
           if mEntEnd ~= nil then
             inEnt = false
