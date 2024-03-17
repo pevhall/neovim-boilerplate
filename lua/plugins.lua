@@ -112,18 +112,17 @@ return {
     end
   },
   -- }}}
-
---  { -- {{{ neogit
---    "NeogitOrg/neogit",
---    lazy = false,
---    dependencies = {
---      "nvim-lua/plenary.nvim",         -- required
---      "nvim-telescope/telescope.nvim", -- optional
---      "sindrets/diffview.nvim",        -- optional
---      "ibhagwan/fzf-lua",              -- optional
---    },
---    config = true
---  }, -- }}}
+-- {{{ LazyGit
+  {
+    "kdheepak/lazygit.nvim",
+      dependencies =  {
+          "nvim-telescope/telescope.nvim",
+          "nvim-lua/plenary.nvim"
+      },
+      config = function()
+          require("telescope").load_extension("lazygit")
+      end,
+  }, -- }}}
 
   {-- {{{ diffview
     "sindrets/diffview.nvim",
@@ -240,7 +239,19 @@ return {
   },
   -- }}}
 
-  { -- {{{ simple_highlighting
+-- {{{ buf-surf
+  {
+    'ton/vim-bufsurf',
+    --config = function()
+    --  vim.api.nvim_exec2([[
+    --    nmap <a-i> <Plug>buf-surf-forward
+    --    vmap <a-o> <Plug>buf-surf-back
+    --  ]], {})
+    --end,
+  }, -- }}}
+
+-- {{{ simple_highlighting 
+  {
     'pevhall/simple_highlighting',
     config = function()
       vim.api.nvim_exec2([[

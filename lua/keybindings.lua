@@ -170,7 +170,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
---- {{{
+--- }}}
+
+-- {{{
+vim.keymap.set('n', '<a-o>', ':BufSurfBack<CR>')
+vim.keymap.set('n', '<a-i>', ':BufSurfForward<CR>')
+-- }}}
 
 -- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0
+
 
