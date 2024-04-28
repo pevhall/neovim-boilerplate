@@ -43,7 +43,8 @@ nm('<leader>v', '<cmd>NeoTreeFocusToggle<CR>')                                  
 
 --{{{ misc
 --" Quickly select the text that was just pasted. 
-nm('gV', '`[v`]')
+nm('gp', '`[v`]')
+
 --"<https://stackoverflow.com/questions/4256697/vim-search-and-highlight-but-do-not-jump>
 nm('#', ':let @/ = \"\\\\<<C-r><C-w>\\\\>\"<cr>:set hlsearch<cr>')
 --To search for visually selected text <https://vim.fandom.com/wiki/Search_for_visually_selected_text>
@@ -172,11 +173,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 --- }}}
 
--- {{{
+-- {{{ BufSurf
 vim.keymap.set('n', '<a-o>', ':BufSurfBack<CR>')
 vim.keymap.set('n', '<a-i>', ':BufSurfForward<CR>')
 -- }}}
 
+
+vim.api.nvim_exec2([[
+function! WritePreserveDateLinux()
+    let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
+    write
+    call system("touch --date='@".mtime."' ".shellescape(expand('%:p')))
+    edit
+endfunction
+]], {})
 -- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0
 
 
