@@ -126,19 +126,20 @@ return {
     end
   },
   -- }}}
--- {{{ LazyGit
-  {
-    "kdheepak/lazygit.nvim",
-      dependencies =  {
-          "nvim-telescope/telescope.nvim",
-          "nvim-lua/plenary.nvim"
-      },
-      config = function()
-          require("telescope").load_extension("lazygit")
-      end,
-  }, -- }}}
 
-  {-- {{{ diffview
+-- {{{ LazyGit
+--  {
+--    "kdheepak/lazygit.nvim",
+--      dependencies =  {
+--          "nvim-telescope/telescope.nvim",
+--          "nvim-lua/plenary.nvim"
+--      },
+--      config = function()
+--          require("telescope").load_extension("lazygit")
+--      end,
+--  }, -- }}}
+
+  {-- diffview {{{ 
     "sindrets/diffview.nvim",
 --    lazy = true,
     dependencies = "nvim-tree/nvim-web-devicons",
@@ -205,24 +206,28 @@ return {
   },
   -- }}}
 
-  -- Theme: Sonokai {{{
+-- mini {{{
   {
-    "sainnhe/sonokai",
-    lazy = false,
-    config = function ()
-      require "extensions.colorscheme.sonokai"
-    end
+    'echasnovski/mini.ai',
   },
-  -- }}}
+  {
+    'echasnovski/mini.surround',
+  },
+  {
+    'mg979/vim-visual-multi',
+  },
 
--- removed -- Theme: Material {{{ 
---  {
---    "marko-cerovac/material.nvim",
---    config = function()
---      require "extensions.colorscheme.material"
---    end,
---  },
---  -- }}}
+--}}}
+
+  -- Theme: Sonokai {{{
+  --{
+  --  "sainnhe/sonokai",
+  --  lazy = false,
+  --  config = function ()
+  --    require "extensions.colorscheme.sonokai"
+  --  end
+  --},
+  -- }}}
 
   -- Theme: Tokyonight {{{
   {
@@ -231,10 +236,8 @@ return {
     priority = 1000,
     opts = {},
     config = function()
-      require('tokyonight').setup ({
---       lualine_bold = true,
---       sidebars = { "qf", "vista_kind", "terminal", "packer" },
-      })
+      require "extensions.colorscheme.tokyodark"
+      --require('tokyonight').setup ({ })
     end,
   },
   -- }}}

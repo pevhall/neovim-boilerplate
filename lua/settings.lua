@@ -104,5 +104,4 @@ augroup END
 --endif
 ---}}}
 
-
 -- vim: tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=1

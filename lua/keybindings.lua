@@ -178,6 +178,9 @@ vim.keymap.set('n', '<a-o>', ':BufSurfBack<CR>')
 vim.keymap.set('n', '<a-i>', ':BufSurfForward<CR>')
 -- }}}
 
+-- Run line(s) in bash and past the results below lines
+vim.keymap.set("n", "<leader>Xb", "yy2o<ESC>kpV:!/bin/bash<CR>")
+vim.keymap.set("v", "<leader>Xb", "y'<P'<O<ESC>'>o<ESC>:<C-u>'<,'>!/bin/bash<CR>")
 
 vim.api.nvim_exec2([[
 function! WritePreserveDateLinux()
