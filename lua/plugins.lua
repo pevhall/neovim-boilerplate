@@ -96,8 +96,8 @@ return {
       -- Uncomment next line if you want to follow only stable versions
       -- version = "*"
       config = function()
-      require('neogen').setup ({
-        snippet_engine = "luasnip"
+        require('neogen').setup ({
+          snippet_engine = "luasnip"
       })
     end,
   },
@@ -208,15 +208,23 @@ return {
 
 -- mini {{{
   {
+    'echasnovski/mini-git',
+    lazy = false,
+    config = function()
+      require('mini.git').setup()
+    end
+  },
+  {
     'echasnovski/mini.ai',
   },
   {
     'echasnovski/mini.surround',
   },
-  {
+--}}}
+
+  { -- multi cusro {{{
     'mg979/vim-visual-multi',
   },
-
 --}}}
 
   -- Theme: Sonokai {{{
