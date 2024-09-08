@@ -1,3 +1,4 @@
+--local json = require"json"
 local lfs = require"lfs"
 
 local deps_map = {['work'] = {}}
@@ -53,7 +54,7 @@ local function vhdl_file_get_immediate_depends_str(f_path)
     local line_lower = string.lower(line)
     local package_name = string.match(line_lower, '^[^-]*use%s+work%.([%w_]+).*')
     if package_name ~= nil then
-      if package_ignore_filter(package_name) then
+      if not package_ignore_filter(package_name) then
         packages[#packages+1] = package_name
       end
     end
@@ -96,9 +97,9 @@ local function vhdl_file_update_depends(dep_top_name)
 
   while #to_scan_map > 0 do
     local d_map = table.remove(to_scan_map)
-    vim.print(to_scan_map)
-    vim.print('d_map')
-    vim.print(d_map)
+    -- vim.print(to_scan_map)
+    -- vim.print('d_map')
+    -- vim.print(d_map)
     local f_path = d_map['file']
     local f_modified = lfs.attributes(f_path, 'modification')
 
@@ -153,8 +154,8 @@ local dep_name_added = nil
 
 local function priv_add_ent(dep)
   dep_name_added[dep['name']] = true
-  print('dep name')
-  vim.print(dep['name'])
+  -- print('dep name')
+  -- vim.print(dep['name'])
 
   local pkgs = dep['deps']['pkgs']
   if pkgs ~= nil then
@@ -168,14 +169,14 @@ local function priv_add_ent(dep)
   local ents = dep['deps']['ents']
   if ents ~= nil then
 
-    print('ents')
-    vim.print(ents)
+    -- print('ents')
+    -- vim.print(ents)
     for _, d in ipairs(ents) do
-      vim.print('d name')
-      vim.print(d['name'])
-      print ('dep_name_added')
+      -- vim.print('d name')
+      -- vim.print(d['name'])
+      -- print ('dep_name_added')
       if dep_name_added[d['name']] == nil then
-        print('  Adding')
+        -- print('  Adding')
         priv_add_ent(d)
       end
     end
@@ -192,8 +193,8 @@ local function update_compile_order()
   dep_name_added = {}
   dep_compile_order = {}
 
-  print('deps_top')
-  vim.print(deps_top)
+  -- print('deps_top')
+  -- vim.print(deps_top)
   priv_add_ent(deps_top)
 end
 
@@ -206,19 +207,37 @@ local function dep_list_to_dep_name_list(dep_list)
   return dep_name_list
 end
 
-local function write_compile_order_list()
-  vim.print(dep_compile_order)
+local function write_compile_order()
+  -- vim.print(dep_compile_order)
   update_compile_order()
-  print('a')
-  vim.print(dep_compile_order)
-  print('b')
+  -- print('a')
+  -- vim.print(dep_compile_order)
+  -- print('b')
   local compile_name_list = dep_list_to_dep_name_list(dep_compile_order)
 
   local row, _ = vim.api.nvim__buf_stats(0).current_lnum
   vim.api.nvim_buf_set_lines(0, row, row, false, compile_name_list)
 end
 
+--local function write_file_dependencies(f_path)
+--  print('trying to write file '..f_path)
+--  local file = assert(io.open(f_path, "w"))
+--  local j = json.encode(deps_map)
+--  file:write(j)
+--  file:close()
+--end
+--
+--local function write_file_dependencies_nvim(opts)
+--  if #opts.fargs ~= 1 then
+--    print("ERROR one arguemnts required")
+--    return
+--  end
+--  local f_path = opts.fargs[1]
+--  write_file_dependencies(f_path)
+--end
+
 vim.api.nvim_create_user_command('VhdlDepsFileList', update_fw_files,  { nargs='+' , complete='file'})
 vim.api.nvim_create_user_command('VhdlDepsUpdate', update_deps_top,  { nargs='+' , complete='file'})
-vim.api.nvim_create_user_command('VhdlDepsWriteCompileOrder', write_compile_order_list,  { nargs=0})
+vim.api.nvim_create_user_command('VhdlDepsWriteCompileOrder', write_compile_order,  { nargs=0})
+--vim.api.nvim_create_user_command('VhdlDepsWriteFileTable', write_file_dependencies_nvim,  { nargs='+' , complete='file'})
 
