@@ -190,6 +190,30 @@ function! WritePreserveDateLinux()
     edit
 endfunction
 ]], {})
+
+local function format_on_save()
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+      -- Check if format_on_save is enabled for this buffer
+      if vim.b.format_on_save_enabled == false then
+        return
+      end
+      vim.lsp.buf.format()
+    end,
+  })
+end
+format_on_save()
+
+-- Function to toggle format on save for the current buffer
+function FormatOnSaveToggle()
+  if vim.b.format_on_save_enabled == nil then
+    vim.b.format_on_save_enabled = true
+  end
+  vim.b.format_on_save_enabled = not vim.b.format_on_save_enabled
+  print("Format on save " .. (vim.b.format_on_save_enabled and "enabled" or "disabled"))
+end
+
 -- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0
 
 

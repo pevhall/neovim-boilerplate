@@ -189,7 +189,11 @@ return {
 
   -- vim-visual-multi {{{
   {
-    'mg979/vim-visual-multi',
+    "jake-stewart/multicursor.nvim",
+    branch = "1.0",
+    config = function()
+      require "extensions.multicursor"
+    end
   },
   -- }}}
 
@@ -218,11 +222,6 @@ return {
   },
   {
     'echasnovski/mini.surround',
-  },
---}}}
-
-  { -- multi cusro {{{
-    'mg979/vim-visual-multi',
   },
 --}}}
 
