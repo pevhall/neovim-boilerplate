@@ -181,10 +181,9 @@ return {
 --}}}
 
 --{{{ TreeSitter Context
-  {
-    'nvim-treesitter/nvim-treesitter-context',
-  },
-
+--  {
+--    'nvim-treesitter/nvim-treesitter-context',
+--  },
 --}}}
 
   -- vim-visual-multi {{{
